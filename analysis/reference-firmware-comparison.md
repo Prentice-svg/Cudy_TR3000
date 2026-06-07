@@ -52,7 +52,8 @@ Both images include:
 - MT7981 Wi-Fi offload firmware
 
 The generated image removes iStore and adds `nlbwmon` with its LuCI traffic
-statistics page. It additionally embeds:
+statistics page. It also adds Tailscale 1.84.2 and the community Tailscale LuCI
+4.0.0-r1 interface with Simplified Chinese translation. It additionally embeds:
 
 - AArch64 Mihomo core at `/etc/openclash/core/clash_meta`
 - `/etc/openclash/GeoIP.dat`
@@ -116,4 +117,4 @@ increase, F50 is using CPU/software flow offload.
 
 Generated image SHA256:
 
-`a4f674d59c69934c269b0ab22ce08c643d997a31e123618389023251844dfe26`
+`fb9fedd8894cf457dd1adbbb7f75304811ff1d6c0f4d8d6b1a7f22ac15972684`

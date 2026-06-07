@@ -23,6 +23,10 @@ test "$size" -lt "$max"
 
 grep -q '"cudy,tr3000-mod"' "$BIN_DIR/profiles.json"
 grep -q '^luci-app-openclash ' "$MANIFEST"
+grep -q '^tailscale ' "$MANIFEST"
+grep -q "^luci-app-tailscale-community - $TAILSCALE_LUCI_VERSION-r1" "$MANIFEST"
+grep -q '^luci-i18n-tailscale-community-zh-cn ' "$MANIFEST"
+test -x "$ROOTFS/etc/init.d/tailscale-settings"
 grep -q '^luci-app-nlbwmon ' "$MANIFEST"
 grep -q '^nlbwmon ' "$MANIFEST"
 ! grep -Eq '^(luci-app-store|luci-lib-taskd|luci-lib-xterm|taskd) ' "$MANIFEST"
@@ -52,9 +56,15 @@ grep -q '^root:::' "$ROOTFS/etc/shadow"
 
 mkdir -p "$OUT_DIR"
 rm -f "$OUT_DIR"/luci-app-store*.ipk "$OUT_DIR"/luci-app-store*.apk
+rm -f "$OUT_DIR"/luci-app-tailscale-community*.ipk "$OUT_DIR"/luci-app-tailscale-community*.apk
+rm -f "$OUT_DIR"/luci-i18n-tailscale-community-zh-cn*.ipk "$OUT_DIR"/luci-i18n-tailscale-community-zh-cn*.apk
 cp -f "$IMAGE" "$MANIFEST" "$BIN_DIR/profiles.json" "$BIN_DIR/sha256sums" "$OUT_DIR/"
 find "$LEDE_DIR/bin/packages" -type f \
-  \( -name 'luci-app-openclash*.ipk' -o -name 'luci-app-openclash*.apk' \) \
+  \( -name 'luci-app-openclash*.ipk' -o -name 'luci-app-openclash*.apk' \
+     -o -name "luci-app-tailscale-community_${TAILSCALE_LUCI_VERSION}-r1_all.ipk" \
+     -o -name "luci-app-tailscale-community_${TAILSCALE_LUCI_VERSION}-r1_all.apk" \
+     -o -name 'luci-i18n-tailscale-community-zh-cn_0_all.ipk' \
+     -o -name 'luci-i18n-tailscale-community-zh-cn_0_all.apk' \) \
   -exec cp -f {} "$OUT_DIR/" \;
 
 (
@@ -68,6 +78,10 @@ image=$(basename "$IMAGE")
 image_size_bytes=$size
 image_limit_bytes=$max
 openclash=present
+tailscale=present
+tailscale_version=$TAILSCALE_VERSION
+tailscale_luci=present
+tailscale_luci_zh_cn=present
 istore=absent
 nlbwmon=present
 rndis=present

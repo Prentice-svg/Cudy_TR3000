@@ -40,6 +40,7 @@ clone_locked() {
 
 clone_locked "$LEDE_REPO" "$LEDE_DIR" "$LEDE_COMMIT"
 clone_locked "$OPENCLASH_REPO" "$BUILD_ROOT/sources/openclash" "$OPENCLASH_COMMIT"
+clone_locked "$TAILSCALE_LUCI_REPO" "$BUILD_ROOT/sources/luci-app-tailscale-community" "$TAILSCALE_LUCI_COMMIT"
 clone_locked "$META_RULES_REPO" "$BUILD_ROOT/sources/meta-rules-dat" "$META_RULES_COMMIT"
 
 cd "$LEDE_DIR"
@@ -60,8 +61,15 @@ done
 rm -rf package/custom
 mkdir -p package/custom
 cp -a "$BUILD_ROOT/sources/openclash/luci-app-openclash" package/custom/
+cp -a "$BUILD_ROOT/sources/luci-app-tailscale-community/luci-app-tailscale-community" package/custom/
+sed -i "/^LUCI_TITLE/i PKG_VERSION:=$TAILSCALE_LUCI_VERSION\nPKG_RELEASE:=1\n" \
+  package/custom/luci-app-tailscale-community/Makefile
 
 ./scripts/feeds install -a
+
+# Prefer the locked community v4 source over the older copy in the locked LuCI
+# feed. The community version includes daemon settings and current firewall4 UI.
+rm -f package/feeds/luci/luci-app-tailscale-community
 
 mkdir -p files/etc/openclash/core files/etc/uci-defaults files/usr/sbin
 cp -f "$PROJECT_DIR/files/etc/uci-defaults/99-cudy-tr3000-baseline" \

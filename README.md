@@ -11,6 +11,7 @@ The actual OpenWrt build tree is kept in WSL2 at
 
 - LEDE `mediatek/filogic` target, `cudy_tr3000-mod` profile
 - OpenClash with an embedded ARM64 Mihomo core
+- Tailscale 1.84.2 with the community LuCI interface and Chinese translation
 - Netlink bandwidth monitor (`nlbwmon`) with LuCI traffic statistics
 - OpenClash GeoIP, GeoSite, Country MMDB, and ASN MMDB databases
 - USB 3.0, RNDIS, CDC Ethernet, and CDC NCM support for ZTE F50

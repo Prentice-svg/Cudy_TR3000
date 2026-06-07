@@ -177,12 +177,14 @@ luci-app-firewall - 26.155.27339~5fc1fd8
 luci-app-nlbwmon - 26.155.27339~5fc1fd8
 luci-app-openclash - 0.47.097
 luci-app-package-manager - 26.155.27339~5fc1fd8
+luci-app-tailscale-community - 4.0.0-r1
 luci-base - 26.155.27339~5fc1fd8
 luci-compat - 26.155.27339~5fc1fd8
 luci-i18n-base-zh-cn - 26.155.27339~5fc1fd8
 luci-i18n-firewall-zh-cn - 26.155.27339~5fc1fd8
 luci-i18n-nlbwmon-zh-cn - 26.155.27339~5fc1fd8
 luci-i18n-package-manager-zh-cn - 26.155.27339~5fc1fd8
+luci-i18n-tailscale-community-zh-cn - 0
 luci-lib-base - 26.155.27339~5fc1fd8
 luci-lib-chartjs - 26.155.27339~5fc1fd8
 luci-lib-ip - 26.155.27339~5fc1fd8
@@ -229,6 +231,7 @@ ruby-psych - 3.3.6-1
 ruby-stringio - 3.3.6-1
 ruby-yaml - 3.3.6-1
 shellsync - 0.2-2
+tailscale - 1.84.2-1
 terminfo - 6.4-3
 ubi-utils - 2.1.5-1
 uboot-envtools - 2023.01-1
