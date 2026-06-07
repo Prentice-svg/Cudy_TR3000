@@ -1,0 +1,64 @@
+CONFIG_TARGET_mediatek=y
+CONFIG_TARGET_mediatek_filogic=y
+CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-mod=y
+CONFIG_PACKAGE_bash=y
+# CONFIG_PACKAGE_coremark is not set
+# CONFIG_PACKAGE_etherwake is not set
+CONFIG_PACKAGE_firewall=m
+CONFIG_PACKAGE_firewall4=y
+# CONFIG_PACKAGE_htop is not set
+CONFIG_PACKAGE_iptables-mod-conntrack-extra=m
+CONFIG_PACKAGE_iptables-mod-fullconenat=m
+CONFIG_PACKAGE_jansson=y
+CONFIG_PACKAGE_kmod-crypto-crc32c=y
+CONFIG_PACKAGE_kmod-inet-diag=y
+CONFIG_PACKAGE_kmod-ipt-conntrack-extra=m
+CONFIG_PACKAGE_kmod-ipt-fullconenat=m
+# CONFIG_PACKAGE_kmod-ipt-offload is not set
+CONFIG_PACKAGE_kmod-lib-crc32c=y
+CONFIG_PACKAGE_kmod-mii=y
+CONFIG_PACKAGE_kmod-nft-core=y
+CONFIG_PACKAGE_kmod-nft-fib=y
+CONFIG_PACKAGE_kmod-nft-fullcone=y
+CONFIG_PACKAGE_kmod-nft-nat=y
+CONFIG_PACKAGE_kmod-nft-offload=y
+CONFIG_PACKAGE_kmod-nft-tproxy=y
+# CONFIG_PACKAGE_kmod-tcp-bbr is not set
+CONFIG_PACKAGE_kmod-usb-net=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ether=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ncm=y
+CONFIG_PACKAGE_kmod-usb-net-rndis=y
+CONFIG_PACKAGE_libatomic=y
+CONFIG_PACKAGE_libevdev=y
+CONFIG_PACKAGE_libgmp=y
+CONFIG_PACKAGE_libnftnl=y
+CONFIG_PACKAGE_libreadline=y
+CONFIG_PACKAGE_libruby=y
+CONFIG_PACKAGE_libudev-zero=y
+CONFIG_PACKAGE_libusb-1.0=y
+# CONFIG_PACKAGE_libuuid is not set
+CONFIG_PACKAGE_libyaml=y
+# CONFIG_PACKAGE_luci-app-arpbind is not set
+# CONFIG_PACKAGE_luci-app-autoreboot is not set
+# CONFIG_PACKAGE_luci-app-ddns is not set
+CONFIG_PACKAGE_luci-app-openclash=y
+# CONFIG_PACKAGE_luci-app-turboacc is not set
+# CONFIG_PACKAGE_luci-app-upnp is not set
+# CONFIG_PACKAGE_luci-app-vlmcsd is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_PACKAGE_luci-app-wol is not set
+# CONFIG_PACKAGE_miniupnpd is not set
+CONFIG_PACKAGE_nftables-json=y
+CONFIG_PACKAGE_ruby=y
+CONFIG_PACKAGE_ruby-bigdecimal=y
+CONFIG_PACKAGE_ruby-date=y
+CONFIG_PACKAGE_ruby-digest=y
+CONFIG_PACKAGE_ruby-enc=y
+CONFIG_PACKAGE_ruby-pstore=y
+CONFIG_PACKAGE_ruby-psych=y
+CONFIG_PACKAGE_ruby-stringio=y
+CONFIG_PACKAGE_ruby-yaml=y
+CONFIG_PACKAGE_unzip=y
+CONFIG_PACKAGE_usbutils=y
+# CONFIG_PACKAGE_vlmcsd is not set
+# CONFIG_PACKAGE_vsftpd is not set

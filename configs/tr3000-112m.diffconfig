@@ -1,0 +1,43 @@
+CONFIG_TARGET_mediatek=y
+CONFIG_TARGET_mediatek_filogic=y
+CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-mod=y
+CONFIG_TARGET_ROOTFS_SQUASHFS=y
+CONFIG_PACKAGE_luci=y
+CONFIG_PACKAGE_luci-app-openclash=y
+CONFIG_PACKAGE_luci-app-nlbwmon=y
+CONFIG_PACKAGE_nlbwmon=y
+CONFIG_PACKAGE_kmod-usb3=y
+CONFIG_PACKAGE_kmod-mii=y
+CONFIG_PACKAGE_kmod-usb-net=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ether=y
+CONFIG_PACKAGE_kmod-usb-net-rndis=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ncm=y
+CONFIG_PACKAGE_usbutils=y
+CONFIG_PACKAGE_curl=y
+CONFIG_PACKAGE_ca-bundle=y
+CONFIG_PACKAGE_bash=y
+CONFIG_PACKAGE_ip-full=y
+CONFIG_PACKAGE_kmod-tun=y
+CONFIG_PACKAGE_unzip=y
+CONFIG_PACKAGE_ruby=y
+CONFIG_PACKAGE_ruby-yaml=y
+CONFIG_PACKAGE_dnsmasq-full=y
+CONFIG_PACKAGE_luci-app-firewall=y
+CONFIG_PACKAGE_firewall4=y
+CONFIG_PACKAGE_kmod-nft-tproxy=y
+# CONFIG_PACKAGE_coremark is not set
+# CONFIG_PACKAGE_htop is not set
+# CONFIG_PACKAGE_ddns-scripts is not set
+# CONFIG_PACKAGE_ddns-scripts-services is not set
+# CONFIG_PACKAGE_etherwake is not set
+# CONFIG_PACKAGE_miniupnpd is not set
+# CONFIG_PACKAGE_vlmcsd is not set
+# CONFIG_PACKAGE_vsftpd is not set
+# CONFIG_PACKAGE_luci-app-arpbind is not set
+# CONFIG_PACKAGE_luci-app-autoreboot is not set
+# CONFIG_PACKAGE_luci-app-ddns is not set
+# CONFIG_PACKAGE_luci-app-turboacc is not set
+# CONFIG_PACKAGE_luci-app-upnp is not set
+# CONFIG_PACKAGE_luci-app-vlmcsd is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_PACKAGE_luci-app-wol is not set

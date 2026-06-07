@@ -1,0 +1,7 @@
+logs/
+
+artifacts/*.bin
+artifacts/*.ipk
+artifacts/*.apk
+artifacts/SHA256SUMS
+

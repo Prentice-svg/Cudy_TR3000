@@ -1,0 +1,100 @@
+#!/bin/sh
+
+set -u
+
+watch_seconds="${1:-0}"
+
+mount_debugfs() {
+	if [ ! -d /sys/kernel/debug ]; then
+		mkdir -p /sys/kernel/debug
+	fi
+	if ! grep -q ' /sys/kernel/debug debugfs ' /proc/mounts; then
+		mount -t debugfs debugfs /sys/kernel/debug 2>/dev/null || true
+	fi
+}
+
+ppe_count() {
+	file="$1"
+	if [ ! -r "$file" ]; then
+		printf 'unavailable'
+		return
+	fi
+
+	count="$(grep -c -E 'BND|bound' "$file" 2>/dev/null || true)"
+	printf '%s' "${count:-0}"
+}
+
+hw_conntrack_count() {
+	if [ -r /proc/net/nf_conntrack ]; then
+		grep -c '\[HW_OFFLOAD\]' /proc/net/nf_conntrack 2>/dev/null || true
+	elif command -v conntrack >/dev/null 2>&1; then
+		conntrack -L 2>/dev/null | grep -c '\[HW_OFFLOAD\]' || true
+	else
+		printf 'unavailable'
+	fi
+}
+
+usb_interfaces() {
+	for dev in /sys/class/net/*; do
+		[ -e "$dev/device" ] || continue
+		path="$(readlink -f "$dev/device" 2>/dev/null || true)"
+		case "$path" in
+			*usb*) basename "$dev" ;;
+		esac
+	done
+}
+
+echo "== Cudy TR3000 hardware offload check =="
+echo
+echo "-- Device --"
+tr '\0' '\n' </proc/device-tree/compatible 2>/dev/null || true
+uname -a
+
+echo
+echo "-- F50 / USB networking --"
+echo "USB network interfaces: $(usb_interfaces | tr '\n' ' ')"
+ip -4 route show default 2>/dev/null || true
+lsusb 2>/dev/null || true
+lsmod | grep -E 'rndis_host|cdc_ncm|cdc_ether|usbnet|xhci_mtk' || true
+
+echo
+echo "-- Offload configuration --"
+echo "flow_offloading=$(uci -q get firewall.@defaults[0].flow_offloading || echo unset)"
+echo "flow_offloading_hw=$(uci -q get firewall.@defaults[0].flow_offloading_hw || echo unset)"
+lsmod | grep -E 'nf_flow_table|nft_flow_offload|mt7915e' || true
+nft list ruleset 2>/dev/null | grep -E 'flowtable|flags offload|flow add' || true
+
+mount_debugfs
+
+echo
+echo "-- PPE state --"
+echo "ppe0 bound entries: $(ppe_count /sys/kernel/debug/ppe0/entries)"
+echo "ppe1 bound entries: $(ppe_count /sys/kernel/debug/ppe1/entries)"
+echo "conntrack HW_OFFLOAD flows: $(hw_conntrack_count)"
+
+if [ "$watch_seconds" -gt 0 ] 2>/dev/null; then
+	echo
+	echo "-- Watching PPE while you run a direct, non-OpenClash speed test --"
+	echo "time ppe0_bound ppe1_bound conntrack_hw"
+	end=$(( $(date +%s) + watch_seconds ))
+	while [ "$(date +%s)" -lt "$end" ]; do
+		printf '%s %s %s %s\n' \
+			"$(date +%H:%M:%S)" \
+			"$(ppe_count /sys/kernel/debug/ppe0/entries)" \
+			"$(ppe_count /sys/kernel/debug/ppe1/entries)" \
+			"$(hw_conntrack_count)"
+		sleep 1
+	done
+fi
+
+cat <<'EOF'
+
+Interpretation:
+- flow_offloading_hw=1 plus "flags offload" means firewall4 requested hardware offload.
+- Increasing PPE bound entries and [HW_OFFLOAD] flows during a direct speed test
+  proves that traffic is entering MT7981 PPE.
+- Run the test with OpenClash disabled or bypassed. Proxied traffic cannot use
+  normal PPE flow offload.
+- A USB default route with no increasing PPE entries means F50 networking works,
+  but that USB path is using CPU/software offload rather than PPE hardware offload.
+EOF

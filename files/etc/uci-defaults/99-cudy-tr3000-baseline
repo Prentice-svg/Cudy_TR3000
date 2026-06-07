@@ -1,0 +1,10 @@
+#!/bin/sh
+
+uci -q set network.lan.ipaddr='192.168.1.1'
+uci -q set firewall.@defaults[0].flow_offloading='1'
+uci -q set firewall.@defaults[0].flow_offloading_hw='1'
+uci -q commit network
+uci -q commit firewall
+
+exit 0
+
