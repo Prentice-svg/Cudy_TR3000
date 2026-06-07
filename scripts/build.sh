@@ -72,9 +72,10 @@ sed -i "/^LUCI_TITLE/i PKG_VERSION:=$TAILSCALE_LUCI_VERSION\nPKG_RELEASE:=1\n" \
 rm -f package/feeds/luci/luci-app-tailscale-community
 
 mkdir -p files/etc/openclash/core files/etc/uci-defaults files/usr/sbin
-cp -f "$PROJECT_DIR/files/etc/uci-defaults/99-cudy-tr3000-baseline" \
+rm -f files/etc/uci-defaults/99-cudy-tr3000-*
+cp -f "$PROJECT_DIR/files/etc/uci-defaults/99-cudy-tr3000-r4-network-defaults" \
   files/etc/uci-defaults/
-chmod 0755 files/etc/uci-defaults/99-cudy-tr3000-baseline
+chmod 0755 files/etc/uci-defaults/99-cudy-tr3000-r4-network-defaults
 cp -f "$PROJECT_DIR/files/usr/sbin/tr3000-offload-check" files/usr/sbin/
 chmod 0755 files/usr/sbin/tr3000-offload-check
 

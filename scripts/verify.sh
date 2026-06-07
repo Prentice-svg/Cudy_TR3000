@@ -49,8 +49,20 @@ echo "$GEOSITE_SHA256  $ROOTFS/etc/openclash/GeoSite.dat" | sha256sum -c -
 echo "$COUNTRY_MMDB_SHA256  $ROOTFS/etc/openclash/Country.mmdb" | sha256sum -c -
 echo "$ASN_MMDB_SHA256  $ROOTFS/etc/openclash/ASN.mmdb" | sha256sum -c -
 test -x "$ROOTFS/usr/sbin/tr3000-offload-check"
-grep -q "flow_offloading='1'" "$ROOTFS/etc/uci-defaults/99-cudy-tr3000-baseline"
-grep -q "flow_offloading_hw='1'" "$ROOTFS/etc/uci-defaults/99-cudy-tr3000-baseline"
+DEFAULTS="$ROOTFS/etc/uci-defaults/99-cudy-tr3000-r4-network-defaults"
+test -x "$DEFAULTS"
+grep -q "flow_offloading='1'" "$DEFAULTS"
+grep -q "flow_offloading_hw='1'" "$DEFAULTS"
+grep -q "network.lan.ip6assign='0'" "$DEFAULTS"
+grep -q "network.wan6.disabled='1'" "$DEFAULTS"
+grep -q "dhcp.lan.ra='disabled'" "$DEFAULTS"
+grep -q "dhcp.lan.dhcpv6='disabled'" "$DEFAULTS"
+grep -q "dhcp.lan.ndp='disabled'" "$DEFAULTS"
+grep -q "tailscale.settings.fw_mode='nftables'" "$DEFAULTS"
+grep -q "network.tailscale.device='tailscale0'" "$DEFAULTS"
+grep -q "firewall.tailscale.input='ACCEPT'" "$DEFAULTS"
+grep -q "firewall.tailscale_to_lan.src='tailscale'" "$DEFAULTS"
+grep -q "firewall.lan_to_tailscale.dest='tailscale'" "$DEFAULTS"
 grep -q '^CONFIG_NF_FLOW_TABLE=' "$LEDE_DIR/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_filogic/linux-"*/.config
 grep -q '^CONFIG_NET_MEDIATEK_SOC=y' "$LEDE_DIR/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_filogic/linux-"*/.config
 grep -q '^CONFIG_NET_MEDIATEK_SOC_WED=y' "$LEDE_DIR/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_filogic/linux-"*/.config
@@ -91,6 +103,11 @@ tailscale=present
 tailscale_version=$TAILSCALE_VERSION
 tailscale_luci=present
 tailscale_luci_zh_cn=present
+tailscale_firewall=enabled
+tailscale_firewall_mode=nftables
+lan_ipv6=disabled
+wan_ipv6=disabled
+lan_dhcpv6=disabled
 istore=absent
 nlbwmon=present
 rndis=present

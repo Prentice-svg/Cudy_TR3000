@@ -1,0 +1,42 @@
+#!/bin/sh
+
+uci -q set network.lan.ipaddr='192.168.1.1'
+uci -q set network.lan.ip6assign='0'
+uci -q delete network.lan.ip6hint
+uci -q set network.wan6.disabled='1'
+
+uci -q set dhcp.lan.ra='disabled'
+uci -q set dhcp.lan.dhcpv6='disabled'
+uci -q set dhcp.lan.ndp='disabled'
+
+uci -q set tailscale.settings.fw_mode='nftables'
+uci -q set tailscale.settings.shields_up='0'
+
+uci -q set network.tailscale='interface'
+uci -q set network.tailscale.proto='none'
+uci -q set network.tailscale.device='tailscale0'
+
+uci -q set firewall.tailscale='zone'
+uci -q set firewall.tailscale.name='tailscale'
+uci -q set firewall.tailscale.input='ACCEPT'
+uci -q set firewall.tailscale.output='ACCEPT'
+uci -q set firewall.tailscale.forward='ACCEPT'
+uci -q set firewall.tailscale.masq='1'
+uci -q set firewall.tailscale.mtu_fix='1'
+uci -q set firewall.tailscale.network='tailscale'
+
+uci -q set firewall.tailscale_to_lan='forwarding'
+uci -q set firewall.tailscale_to_lan.src='tailscale'
+uci -q set firewall.tailscale_to_lan.dest='lan'
+uci -q set firewall.lan_to_tailscale='forwarding'
+uci -q set firewall.lan_to_tailscale.src='lan'
+uci -q set firewall.lan_to_tailscale.dest='tailscale'
+
+uci -q set firewall.@defaults[0].flow_offloading='1'
+uci -q set firewall.@defaults[0].flow_offloading_hw='1'
+uci -q commit network
+uci -q commit dhcp
+uci -q commit tailscale
+uci -q commit firewall
+
+exit 0

@@ -1,4 +1,4 @@
-# Cudy TR3000 112M LEDE v2026.06.07-r3
+# Cudy TR3000 112M LEDE v2026.06.07-r4
 
 This release targets the old 128 MB NAND Cudy TR3000 using the
 `cudy_tr3000-mod` 112 MiB UBI partition layout.
@@ -12,6 +12,9 @@ This release targets the old 128 MB NAND Cudy TR3000 using the
 - `dnsmasq-full` nftset support for Firewall4/OpenClash
 - Tailscale 1.84.2
 - Tailscale community LuCI 4.0.0-r1 with Simplified Chinese translation
+- Tailscale uses nftables and has a default `tailscale0` firewall zone,
+  allowing Tailnet devices to access the router and LAN
+- LAN/WAN IPv6 and LAN RA, DHCPv6, and NDP disabled by default
 - Embedded ARM64 Mihomo `clash_meta` core
 - Embedded GeoIP, GeoSite, Country MMDB, and ASN MMDB databases
 - `nlbwmon` LuCI traffic statistics
@@ -46,4 +49,4 @@ Do not preserve settings when migrating from a firewall3/iptables firmware.
 
 - Image size: 45,415,200 bytes
 - SHA256:
-  `5c50208325dae92741bd08a1b57859ac2ad3c8edbb06ff7f0d1dabeae7c73a11`
+  `28c55bf06f60181f81ab3a848cdef2e9b7f0cecdea26070eeca2a920955b7d43`

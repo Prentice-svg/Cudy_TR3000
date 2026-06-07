@@ -13,12 +13,14 @@ The actual OpenWrt build tree is kept in WSL2 at
 - Argon blue LuCI theme enabled by default, with Bootstrap retained as fallback
 - OpenClash with an embedded ARM64 Mihomo core
 - Tailscale 1.84.2 with the community LuCI interface and Chinese translation
+- Tailscale nftables zone enabled for access to the router and LAN
 - Netlink bandwidth monitor (`nlbwmon`) with LuCI traffic statistics
 - OpenClash GeoIP, GeoSite, Country MMDB, and ASN MMDB databases
 - USB 3.0, RNDIS, CDC Ethernet, and CDC NCM support for ZTE F50
 - Software and hardware flow offloading enabled by default
 - Firewall4-compatible `dnsmasq-full` nftset support
 - LuCI at `192.168.1.1`
+- LAN/WAN IPv6 and LAN RA/DHCPv6/NDP disabled by default
 - No preset root password, subscription, or OpenClash configuration
 
 ## Build
