@@ -22,7 +22,13 @@ max=$((112 * 1024 * 1024))
 test "$size" -lt "$max"
 
 grep -q '"cudy,tr3000-mod"' "$BIN_DIR/profiles.json"
+grep -q '^luci-theme-argon ' "$MANIFEST"
+test -d "$ROOTFS/www/luci-static/argon"
+grep -q 'set luci.main.mediaurlbase=/luci-static/argon' \
+  "$ROOTFS/etc/uci-defaults/30_luci-theme-argon"
 grep -q '^luci-app-openclash ' "$MANIFEST"
+grep -q '^nftables-json ' "$MANIFEST"
+grep -q '^CONFIG_PACKAGE_dnsmasq_full_nftset=y' "$LEDE_DIR/.config"
 grep -q '^tailscale ' "$MANIFEST"
 grep -q "^luci-app-tailscale-community - $TAILSCALE_LUCI_VERSION-r1" "$MANIFEST"
 grep -q '^luci-i18n-tailscale-community-zh-cn ' "$MANIFEST"
@@ -69,6 +75,7 @@ find "$LEDE_DIR/bin/packages" -type f \
 
 (
   cd "$OUT_DIR"
+  sha256sum "$(basename "$IMAGE")" > RELEASE_SHA256SUMS
   sha256sum * > SHA256SUMS
 )
 
@@ -78,6 +85,8 @@ image=$(basename "$IMAGE")
 image_size_bytes=$size
 image_limit_bytes=$max
 openclash=present
+argon_theme=present_and_default
+dnsmasq_nftset=enabled
 tailscale=present
 tailscale_version=$TAILSCALE_VERSION
 tailscale_luci=present

@@ -10,12 +10,14 @@ The actual OpenWrt build tree is kept in WSL2 at
 ## Included
 
 - LEDE `mediatek/filogic` target, `cudy_tr3000-mod` profile
+- Argon blue LuCI theme enabled by default, with Bootstrap retained as fallback
 - OpenClash with an embedded ARM64 Mihomo core
 - Tailscale 1.84.2 with the community LuCI interface and Chinese translation
 - Netlink bandwidth monitor (`nlbwmon`) with LuCI traffic statistics
 - OpenClash GeoIP, GeoSite, Country MMDB, and ASN MMDB databases
 - USB 3.0, RNDIS, CDC Ethernet, and CDC NCM support for ZTE F50
 - Software and hardware flow offloading enabled by default
+- Firewall4-compatible `dnsmasq-full` nftset support
 - LuCI at `192.168.1.1`
 - No preset root password, subscription, or OpenClash configuration
 

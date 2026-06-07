@@ -199,6 +199,7 @@ luci-mod-status - 26.155.27339~5fc1fd8
 luci-mod-system - 26.155.27339~5fc1fd8
 luci-proto-ipv6 - 26.155.27339~5fc1fd8
 luci-proto-ppp - 26.155.27339~5fc1fd8
+luci-theme-argon - 2.4.3-r20250722
 luci-theme-bootstrap - 26.155.27339~5fc1fd8
 mt7981-wo-firmware - 20260221-1
 mtd - 26

@@ -1,8 +1,10 @@
 profile=cudy_tr3000-mod
 image=openwrt-mediatek-filogic-cudy_tr3000-mod-squashfs-sysupgrade.bin
-image_size_bytes=45026080
+image_size_bytes=45415200
 image_limit_bytes=117440512
 openclash=present
+argon_theme=present_and_default
+dnsmasq_nftset=enabled
 tailscale=present
 tailscale_version=1.84.2
 tailscale_luci=present
